@@ -1,13 +1,22 @@
 CFILES	:= 	ft_a.c \
 			ft_b.c \
 			ft_c.c \
-			main.c
+
+OFILES	:= $(CFILES:.c=.o)
 
 CFLAGS 	:= -Wall -Wextra -Werror
 
 NAME	:= libft.a
 
-abc:
-	cc $(CFLAGS) $(CFILES)  -o $(NAME)
+all: $(NAME) clean
 
+$(NAME): $(OFILES)
+	ar rcs $(NAME) $(OFILES) 
 
+clean:
+	rm -f $(OFILES)
+
+fclean:  
+	clean rm -f $(NAME)
+
+re: fclean $(NAME)

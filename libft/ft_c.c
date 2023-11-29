@@ -1,1 +1,1 @@
-char ft_c(void) {return ('c');}
+char ft_c(void) {return ('C');}
