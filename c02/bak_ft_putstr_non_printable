@@ -1,0 +1,146 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_putstr_non_printable.c                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: aartamon <aartamon@student.42malaga.com>   +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/11/07 20:20:54 by aartamon          #+#    #+#             */
+/*   Updated: 2023/11/11 20:31:15 by aartamon         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include <unistd.h>
+#include <stdlib.h>
+#include <stdio.h>
+
+char hex_char(int value)
+{
+	char	output;
+
+	if ((9 < value) && (value < 16))
+		output = value + 87;
+	if ((-1 < value) && (value < 10))
+		output = value + 48;
+	return (output);
+}
+
+void	write_hex(int value, int mod)
+{
+	char	c;
+
+	if ( value == 0)
+	{}
+	else
+	{
+		write_hex(value / 16, value % 16);
+		c = hex_char(value % 16);
+		write(1, &c, 1);	
+	}
+}
+/*
+void	write_hex(int value, int mod)
+{
+	char	c;
+	//if (0 <= value && value <= 15 && mod > -1)
+	if ( value == 0)
+	
+		puts("hi from if");
+		c = hex_char(value);
+		write(1, &c, 1);
+		c = hex_char(mod);
+		c = 'X';
+		write(1, &c, 1);
+	}
+	else
+	{
+		write_hex(value / 16, value % 16);
+		c = hex_char(value % 16);
+		write(1, &c, 1);	
+	}
+	//write(1, &c, 1);	
+
+		//puts("hi from write_hex/else");
+	//return (value / 16, value % 16);
+}*/
+/*
+void write_hex(int value)
+{
+	char	hex_num[100];
+	int		i;
+	int		j;
+	int		temp;
+
+	while (value != 0)
+	{
+		temp = value % 16;
+		if (temp < 10)
+			temp = temp + 48;
+		else
+			temp = temp + 87;
+		write(1, &temp, 1);
+		value = value / 16;
+	}
+}*/
+
+
+
+int	is_printable(char c)
+{
+	int	i;
+	int	floor;
+	int	ceiling;
+
+	floor = 32;
+	ceiling = 126;
+	i = 0;
+	if (!(floor <= c  && c <= ceiling))
+		return (0);
+	return (1);
+}
+
+int	my_print(char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i])
+	{
+		write(1, &str[i], 1);
+		i++;
+	}
+	write(1, "\n", 1);
+	return (i);
+}
+
+
+
+
+int	main(int argc, char **argv)
+{
+	char	test[] = "t";
+	char	test1[] = "\v";	
+	char	temp;
+	char	*test_phrase = "Coucou\ntu vas bien ?";
+	int		i;
+
+	printf("test = '%c', is_printable = %d,\n", *test, \
+				is_printable(*test));
+	printf("test1 = '%c', is_printable = %d,\n", *test1, \
+				is_printable(*test1));
+	if (argc == 2)
+	{	
+		temp = hex_char(atoi(argv[1]));
+		//write(1, &temp, 1);  	
+		//write(1, "\n", 1);
+		i = atoi(argv[1]);
+		write(1, &"0123456789abcdef"[i], 1);
+		write(1, "\n", 1);
+		write_hex(atoi(argv[1]), -1);
+		write(1, "\n", 1);
+	}
+	/*int	len;
+	len = my_print(test_phrase);
+	printf("the len is %d", len);*/
+	return (0);
+}

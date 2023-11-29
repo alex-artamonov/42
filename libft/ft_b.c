@@ -1,0 +1,1 @@
+char ft_b(void) {return ('b');}

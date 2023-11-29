@@ -1,0 +1,19 @@
+Name :=	libft.a
+
+CFILES := ft_a.c ft_b.c ft_b.c
+
+OFILES = $(SRCS:.c=.o)
+
+CFLAGS := -Wall -Wextra -Werror
+
+all: $(NAME) clean
+
+$(NAME): $(OFILES)
+     ar rcs $(NAME) $(OFILES)
+
+clean:
+
+fclean:
+	clean rm -f $(NAME)
+
+re:

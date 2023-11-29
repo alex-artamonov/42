@@ -14,7 +14,9 @@ void rush(int i, int y);
 // void form_row(int finish, char first_last, char middle);
 
 int main()
-{
+{	
+	rush(5, 3);
+	rush(1, 1);
 	rush(1, 5);
 	return(0);
 }
