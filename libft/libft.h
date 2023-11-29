@@ -5,5 +5,4 @@ char ft_a(void);
 char ft_b(void);
 char ft_c(void);
 
-
 #endif
