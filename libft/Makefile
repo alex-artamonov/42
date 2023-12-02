@@ -1,22 +1,30 @@
-CFILES	:= 	ft_a.c \
-			ft_b.c \
-			ft_c.c \
+# -*- MakeFile -*-
 
-OFILES	:= $(CFILES:.c=.o)
+CFLAGS 	= -Wall -Wextra -Werror
 
-CFLAGS 	:= -Wall -Wextra -Werror
+CFILES 	= ft_a.c ft_b.c ft_c.c
 
-NAME	:= libft.a
+OFILES 	= $(CFILES:.c=.o)
 
-all: $(NAME) clean
+NAME 	= libft.a
 
-$(NAME): $(OFILES)
-	ar rcs $(NAME) $(OFILES) 
+$(NAME): $(OFILES) 
+	ar rcs $(NAME) $(OFILES)
+
+all:  $(NAME) clean
+
+$(OFILES): $(CFILES)
+	cc -c $(CFLAGS) $(CFILES)
 
 clean:
 	rm -f $(OFILES)
 
-fclean:  
-	clean rm -f $(NAME)
+fclean:
+	rm -f $(NAME)
 
 re: fclean $(NAME)
+
+proga: $(NAME) main.c
+	cc $(CFLAGS) main.c $(NAME) -o proga
+
+.PHONY:  all clean fclean re

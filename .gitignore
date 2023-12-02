@@ -1,4 +1,5 @@
 *.pdf
 *.out
 *.a
+*.o
 venv
