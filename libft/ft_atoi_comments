@@ -1,0 +1,116 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_atoi.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: aartamon <aartamon@student.42malaga.com>   +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/11/27 18:30:42 by aartamon          #+#    #+#             */
+/*   Updated: 2023/12/01 17:50:03 by aartamon         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include <stdio.h>
+
+static int char_in_str(char c, char *str)
+{
+	int i;
+
+	i = 0;
+	while (str[i])
+	{
+		if (c == str[i])
+			return (1);
+		i++;
+	}
+	return (0);
+}
+
+/*static int	ft_strlen(char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i])
+	{
+		i++;
+	}
+	return (i);
+}*/
+
+static int first_non_space(char *str)
+{
+	//char	*spaces = "\t\v\f\r\n \f-06050";
+	char	*spaces = "\t\v\f\r\n ";
+	int		i;
+
+	i = 0;
+	while (str[i] && char_in_str(str[i], spaces))
+	{
+		i++;
+	}
+	return (i);
+}
+
+static int last_digit(char *str, int start)
+{
+	printf("last_digit: start=%d\n", start);
+	while (str[start] && char_in_str(str[start], "0123456789"))
+	{
+			start++;
+	}
+		return (start - 1);
+}
+
+static int	to_decimal(char *str, int start, int stop)
+{
+    int power_dec;
+    int result;
+
+    printf("start=%d, stop=%d\n", start, stop);
+    power_dec = 1;
+    result = 0;
+    while (start <= stop)
+    {
+            result += (str[stop] - 48) * power_dec;
+            printf("start=%d, str[stop]=%c, result=%d\n", start, str[stop], result);
+            power_dec *= 10;
+            stop--;
+    }
+    return (result);
+}
+
+int	ft_atoi(char *str)
+{
+	int		start;
+	int		stop;
+	int		coeff;
+
+	start = first_non_space(str);
+	
+	printf(" Before if: in \'%s\' first_non_space(str)=%d\n", str, start);
+	
+	if (! char_in_str(str[start], "+-0123456789"))
+	{
+		puts("Hi from atoi if");
+		return (0);
+	}
+	puts("ft_atoi, after if");
+	coeff = 1;
+	if (char_in_str(str[start], "+-"))
+	{
+		if (str[start] == '-')
+			coeff = -1;
+		start++;
+	}
+	printf("After if: in \'%s\' first_non_space(str)=%d\n", str, start);
+	stop = last_digit(str, start);
+	printf("In \'%s\' last_digit(str)=%d\n", str, stop);
+/*	while ('0' <= str[i] && str[i] <= '9')
+	{
+		dummy[i] = str[i];
+		i++;
+	}
+	dummy[i] = '\0';*/
+	return (to_decimal(str, start, stop) * coeff);
+}
