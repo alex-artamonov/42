@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-int char_in_str(char c, char *str)
+static int char_in_str(char c, char *str)
 {
 	int i;
 
@@ -41,9 +41,6 @@ int first_non_space(char *str)
 
 int last_digit(char *str, int start)
 {
-	//int i;
-
-	//i = first_non_space(str);
 	while (str[start] && char_in_str(str[start], "0123456789"))
 	{
 		start++;
@@ -53,18 +50,10 @@ int last_digit(char *str, int start)
 
 int    to_decimal(char *str, int start, int stop)
 {
-	//int i;
 	int power_dec;
-	//int len_str;
 	int result;
 	
 	printf("start=%d, stop=%d\n", start, stop);
-	//printf("first_non_space(str): %d\n", first_non_space(str));
-	//printf("last_digit(str): %d\n", last_digit(str));
-	// len_str = len(str);
-//	i = 0;
-//	i = first_non_space(str);
-//	len_str = last_digit(str) + i - 1;
 	power_dec = 1;
 	result = 0;
 	while (start <= stop)
@@ -76,6 +65,40 @@ int    to_decimal(char *str, int start, int stop)
 	}
 	return (result);
 }
+
+int ft_atoi(char *str)
+{
+	int	i;
+	int	result;
+	int	plus_minus;
+	char	*spaces = "\t\v\f\r\n ";
+
+	result = 0;
+	plus_minus = 1;
+
+	while (char_in_str(*str, spaces))
+	{
+		str++;
+	}
+
+	if (! char_in_str(*str, "-+0123456789"))
+		return (0);
+
+	if (char_in_str(*str, "-+"))
+	{
+		if (*str == '-')
+			plus_minus = -1;
+		str++;
+	}
+	
+	while ('0' <= *str && *str <= '9')
+	{
+		result = result * 10 + (*str - '0');
+		str++;
+	}	
+	return (result * plus_minus);
+}
+
 
 int main(int argc, char **argv)
 {
@@ -89,13 +112,14 @@ int main(int argc, char **argv)
 	int		stop;
 
 	w = argv[1];
-	start = first_non_space(w);
-	stop = last_digit(w, start);
-	printf("start=%d, stop=%d\n", start, stop);
+	// start = first_non_space(w);
+	// stop = last_digit(w, start);
+	// printf("start=%d, stop=%d\n", start, stop);
 	// int range[] = {4, 7};
 	// int last_digit = 5;
-	printf("Atoi: Input: \'%s\', output: \'%d\'\n", w, atoi(w));
-	printf("To_decimal:Input: \'%s\', output: \'%d\'\n", w, to_decimal(w, start, stop));
+	// printf("Atoi: Input: \'%s\', output: \'%d\'\n", w, atoi(w));
+	// printf("To_decimal:Input: \'%s\', output: \'%d\'\n", w, to_decimal(w, start, stop));
 	// printf("Input: \'%s\', output: \'%d\'\n", w, get_first_non_space(w));
+	printf("%d\n", ft_atoi(w));
 	return (0);
 }
