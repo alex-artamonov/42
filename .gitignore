@@ -2,4 +2,5 @@
 *.out
 *.a
 *.o
-venv
+venv.vscode
+.vscode/

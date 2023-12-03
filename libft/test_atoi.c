@@ -117,9 +117,10 @@ int main(int argc, char **argv)
 	// printf("start=%d, stop=%d\n", start, stop);
 	// int range[] = {4, 7};
 	// int last_digit = 5;
-	// printf("Atoi: Input: \'%s\', output: \'%d\'\n", w, atoi(w));
+	printf("Atoi: Input:\t\'%s\', output:\t\'%d\'\n", w, atoi(w));
+	printf("ft_atoi: Input:\t\'%s\', output:\t\'%d\'\n", w, ft_atoi(w));
 	// printf("To_decimal:Input: \'%s\', output: \'%d\'\n", w, to_decimal(w, start, stop));
 	// printf("Input: \'%s\', output: \'%d\'\n", w, get_first_non_space(w));
-	printf("%d\n", ft_atoi(w));
+	// printf("%d\n", ft_atoi(w));
 	return (0);
 }
