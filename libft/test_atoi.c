@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-static int char_in_str(char c, char *str)
+static int char_in_str(char c, const char *str)
 {
 	int i;
 
@@ -68,29 +68,25 @@ int    to_decimal(char *str, int start, int stop)
 
 int ft_atoi(char *str)
 {
-	int	i;
-	int	result;
-	int	plus_minus;
-	char	*spaces = "\t\v\f\r\n ";
+	int		result;
+	int			plus_minus;
+	const char	*spaces = "\t\v\f\r\n ";
+	const char	*digits_plus = "-+0123456789";
 
 	result = 0;
 	plus_minus = 1;
-
 	while (char_in_str(*str, spaces))
 	{
 		str++;
 	}
-
-	if (! char_in_str(*str, "-+0123456789"))
+	if (! char_in_str(*str, digits_plus))
 		return (0);
-
 	if (char_in_str(*str, "-+"))
 	{
 		if (*str == '-')
 			plus_minus = -1;
 		str++;
 	}
-	
 	while ('0' <= *str && *str <= '9')
 	{
 		result = result * 10 + (*str - '0');
