@@ -6,7 +6,7 @@
 /*   By: aartamon <aartamon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 15:02:48 by aartamon          #+#    #+#             */
-/*   Updated: 2023/12/06 16:44:01 by aartamon         ###   ########.fr       */
+/*   Updated: 2023/12/06 17:01:53 by aartamon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -216,9 +216,10 @@ int main(int argc, char **argv)
 	// {
 	// 	i++;
 	// }
-	// i = 0;
-	// while (s3[++i]);
-	// printf("len '%s'=%d\n", s3, i);
+	// i = -1;
+
+	// while (s1[++i]);
+	// printf("len '%s'=%d\n", s1, i);
 
 	return (0);
 }
