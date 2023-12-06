@@ -6,7 +6,7 @@
 /*   By: aartamon <aartamon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 15:02:48 by aartamon          #+#    #+#             */
-/*   Updated: 2023/12/06 17:01:53 by aartamon         ###   ########.fr       */
+/*   Updated: 2023/12/06 17:55:35 by aartamon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,45 +51,45 @@ char * ft_strstr(const char *s1, const char *s2)
 	return ((char *)null);
 }
 
-char * tft_strnstr(const char *s1, const char *s2, unsigned int n)
-{
-	int			i;
-	int 		j;
-	if (s2[0] == '\0')
-	{
-		return ((char *)s1);
-	}
-	if (! n)
-		return (0);
+// char * tft_strnstr(const char *s1, const char *s2, unsigned int n)
+// {
+// 	int			i;
+// 	int 		j;
+// 	if (s2[0] == '\0')
+// 	{
+// 		return ((char *)s1);
+// 	}
+// 	if (! n)
+// 		return (0);
 
-	while (*(s1) && n)
-	{
-		i = 0;
-		printf("before inner while: s1='%s', s2[%d]='%c', n='%d', s1*='%c', *s2='%c'\n", s1, i, s2[i], n, *s1, *s2);
-		while (*(s1 + i) == s2[i])
-		{
-			printf("before if in while: s1='%s', s2[%d]='%c', n='%d', s1*='%c', *s2='%c'\n", s1, i, s2[i], n, *s1, *s2);
-			if (s2[i+1] == '\0')
-			{
-				printf("if in while: s1='%s', s2[%d]='%c', n='%d', s1*='%c', *s2='%c'\n", s1, i, s2[i], n, *s1, *s2);
-				return ((char *)s1);
-			}
+// 	while (*(s1) && n)
+// 	{
+// 		i = 0;
+// 		printf("before inner while: s1='%s', s2[%d]='%c', n='%d', s1*='%c', *s2='%c'\n", s1, i, s2[i], n, *s1, *s2);
+// 		while (*(s1 + i) == s2[i])
+// 		{
+// 			printf("before if in while: s1='%s', s2[%d]='%c', n='%d', s1*='%c', *s2='%c'\n", s1, i, s2[i], n, *s1, *s2);
+// 			if (s2[i+1] == '\0')
+// 			{
+// 				printf("if in while: s1='%s', s2[%d]='%c', n='%d', s1*='%c', *s2='%c'\n", s1, i, s2[i], n, *s1, *s2);
+// 				return ((char *)s1);
+// 			}
 
-			i++;
-			n--;
-			printf("after i++ in while: s1='%s', s2[%d]='%c', n='%d', s1*='%c', *s2='%c'\n", s1, i, s2[i], n, *s1, *s2);
-			if (!n && s2[i])
-				return (0);
-		}
-		printf("after inner while: s1='%s', s2[%d]='%c', n='%d', s1*='%c', *s2='%c'\n", s1, i, s2[i], n, *s1, *s2);
-		s1++;
-		n--;
-		// if (!n && s2[i])
-		// 	return (0);
-	}
-	puts("just before final return (0)");
-	return (0);
-}
+// 			i++;
+// 			n--;
+// 			printf("after i++ in while: s1='%s', s2[%d]='%c', n='%d', s1*='%c', *s2='%c'\n", s1, i, s2[i], n, *s1, *s2);
+// 			if (!n && s2[i])
+// 				return (0);
+// 		}
+// 		printf("after inner while: s1='%s', s2[%d]='%c', n='%d', s1*='%c', *s2='%c'\n", s1, i, s2[i], n, *s1, *s2);
+// 		s1++;
+// 		n--;
+// 		// if (!n && s2[i])
+// 		// 	return (0);
+// 	}
+// 	puts("just before final return (0)");
+// 	return (0);
+// }
 
 char *ft_strnstr(const char *haystack, const char *needle, unsigned int len)
 {
@@ -97,36 +97,68 @@ char *ft_strnstr(const char *haystack, const char *needle, unsigned int len)
 		unsigned int	needle_len;
 
 		needle_len = 0;
-		while (needle[++needle_len]);
-		printf("needle_len=%u\n", needle_len);
+		while (needle[needle_len])
+		{
+			needle_len++;
+		}
 
 		if (needle_len == 0)
+		{
+			printf("needle_len=%u", needle_len);
 			return (char *)haystack;
+		}
+			
+		if (needle_len > len)
+			return (0);
 
 		// if (0 == (needle_len = strnlen(needle, len)))
-		//         return (char *)haystack;
-
+		//        return (char *)haystack;
 		// for (i=0; i<=(int)(len-needle_len); i++)
 		// {
-		//         if ((haystack[0] == needle[0]) &&
-		//                 (0 == ft_strncmp(haystack, needle, needle_len)))
-		//                 return (char *)haystack;
-
-		//         haystack++;
+	    //     if ((haystack[0] == needle[0]) &&
+        //         (0 == ft_strncmp(haystack, needle, needle_len)))
+		// 			{printf("before return in loop, (char *)haystack = '%s'", (char *)haystack);
+        //         return (char *)haystack;}
+	    //     haystack++;
 		// }
 		i = 0;
 		while (i <= (len - needle_len))
 		{
 			if ((haystack[0] == needle[0]) &&
 						(0 == ft_strncmp(haystack, needle, needle_len)))
-						return (char *)haystack;
+						{printf("before return in loop, (char *)haystack = '%s'", (char *)haystack);
+						return (char *)haystack;}
 				haystack++;
+				i++;
 		}
-		return 0;
+		puts("just before final return");
+		return (0);
 }
 
 
+char	*fft_strnstr(const char *haystack, const char *needle, unsigned int len)
+{
+	unsigned int	i;
+	unsigned int	needle_len;
 
+	needle_len = 0;
+	while (needle[needle_len])
+	{
+		needle_len++;
+	}
+	if (needle_len == 0)
+		return ((char *)haystack);
+	i = 0;
+	while (i <= (len - needle_len))
+	{
+		if ((haystack[0] == needle[0]) \
+			&& (0 == ft_strncmp(haystack, needle, needle_len)))
+			return ((char *)haystack);
+		haystack++;
+		i++;
+	}
+	return (0);
+}
 
 void	test_str(const char *s1, const char *s2)
 {
@@ -143,6 +175,9 @@ void	test_str(const char *s1, const char *s2)
 		st_res, ft_res);
 
 }
+
+
+
 
 void	test_strn(const char *s1, const char *s2, unsigned int n)
 {
