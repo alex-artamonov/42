@@ -6,7 +6,7 @@
 /*   By: aartamon <aartamon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 15:02:48 by aartamon          #+#    #+#             */
-/*   Updated: 2023/12/05 19:00:28 by aartamon         ###   ########.fr       */
+/*   Updated: 2023/12/06 16:44:01 by aartamon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ char * ft_strstr(const char *s1, const char *s2)
 			i++;
 			printf("after i++ in while: s1='%s', s2='%s', result='%s', s1*='%c', *s2='%c'\n", s1, s2, null, *s1, *s2);
 		}
-		
+
 		if (! s1)
 			{
 				printf("before s1++: s1='%s', s2='%s', result='%s', s1*='%c', *s2='%c'\n", s1, s2, null, *s1, *s2);
@@ -51,7 +51,7 @@ char * ft_strstr(const char *s1, const char *s2)
 	return ((char *)null);
 }
 
-char * ft_strnstr(const char *s1, const char *s2, unsigned int n)
+char * tft_strnstr(const char *s1, const char *s2, unsigned int n)
 {
 	int			i;
 	int 		j;
@@ -61,7 +61,7 @@ char * ft_strnstr(const char *s1, const char *s2, unsigned int n)
 	}
 	if (! n)
 		return (0);
-	
+
 	while (*(s1) && n)
 	{
 		i = 0;
@@ -74,9 +74,9 @@ char * ft_strnstr(const char *s1, const char *s2, unsigned int n)
 				printf("if in while: s1='%s', s2[%d]='%c', n='%d', s1*='%c', *s2='%c'\n", s1, i, s2[i], n, *s1, *s2);
 				return ((char *)s1);
 			}
-			 
+
 			i++;
-			n--;			
+			n--;
 			printf("after i++ in while: s1='%s', s2[%d]='%c', n='%d', s1*='%c', *s2='%c'\n", s1, i, s2[i], n, *s1, *s2);
 			if (!n && s2[i])
 				return (0);
@@ -91,24 +91,42 @@ char * ft_strnstr(const char *s1, const char *s2, unsigned int n)
 	return (0);
 }
 
-char *t_strnstr(const char *haystack, const char *needle, size_t len)
+char *ft_strnstr(const char *haystack, const char *needle, unsigned int len)
 {
-        int i;
-        size_t needle_len;
+		unsigned int 	i;
+		unsigned int	needle_len;
 
-        if (0 == (needle_len = strnlen(needle, len)))
-                return (char *)haystack;
+		needle_len = 0;
+		while (needle[++needle_len]);
+		printf("needle_len=%u\n", needle_len);
 
-        for (i=0; i<=(int)(len-needle_len); i++)
-        {
-                if ((haystack[0] == needle[0]) &&
-                        (0 == ft_strncmp(haystack, needle, needle_len)))
-                        return (char *)haystack;
+		if (needle_len == 0)
+			return (char *)haystack;
 
-                haystack++;
-        }
-        return 0;
+		// if (0 == (needle_len = strnlen(needle, len)))
+		//         return (char *)haystack;
+
+		// for (i=0; i<=(int)(len-needle_len); i++)
+		// {
+		//         if ((haystack[0] == needle[0]) &&
+		//                 (0 == ft_strncmp(haystack, needle, needle_len)))
+		//                 return (char *)haystack;
+
+		//         haystack++;
+		// }
+		i = 0;
+		while (i <= (len - needle_len))
+		{
+			if ((haystack[0] == needle[0]) &&
+						(0 == ft_strncmp(haystack, needle, needle_len)))
+						return (char *)haystack;
+				haystack++;
+		}
+		return 0;
 }
+
+
+
 
 void	test_str(const char *s1, const char *s2)
 {
@@ -180,7 +198,7 @@ int main(int argc, char **argv)
 	// test_strnstr(s1, s2);
 	// printf("s1=%s, s2=%s\n", s1, s2);
 	char	*s3 = 0;
-	
+
 	s3 = "qwer";
 	// s3 = s1;
 	// s3[0] = 'x';
@@ -191,6 +209,16 @@ int main(int argc, char **argv)
 	// printf("%s\n", strnstr(s1, s2, i));
 
 	// printf("strnstr(\"%s\", \"%s\", %d) = %s\n", s1, s2, i, strnstr(s1, s2, i));
+
+	// int	i;
+	// i = 0;
+	// while (s3[i])
+	// {
+	// 	i++;
+	// }
+	// i = 0;
+	// while (s3[++i]);
+	// printf("len '%s'=%d\n", s3, i);
 
 	return (0);
 }
