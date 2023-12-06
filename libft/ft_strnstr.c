@@ -6,7 +6,7 @@
 /*   By: aartamon <aartamon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 15:02:48 by aartamon          #+#    #+#             */
-/*   Updated: 2023/12/06 17:55:35 by aartamon         ###   ########.fr       */
+/*   Updated: 2023/12/06 18:00:12 by aartamon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,42 +96,42 @@ char *ft_strnstr(const char *haystack, const char *needle, unsigned int len)
 		unsigned int 	i;
 		unsigned int	needle_len;
 
-		needle_len = 0;
-		while (needle[needle_len])
-		{
-			needle_len++;
-		}
+		// needle_len = 0;
+		// while (needle[needle_len])
+		// {
+		// 	needle_len++;
+		// }
 
-		if (needle_len == 0)
-		{
-			printf("needle_len=%u", needle_len);
-			return (char *)haystack;
-		}
+		// if (needle_len == 0)
+		// {
+		// 	printf("needle_len=%u", needle_len);
+		// 	return (char *)haystack;
+		// }
 			
 		if (needle_len > len)
 			return (0);
 
-		// if (0 == (needle_len = strnlen(needle, len)))
-		//        return (char *)haystack;
-		// for (i=0; i<=(int)(len-needle_len); i++)
-		// {
-	    //     if ((haystack[0] == needle[0]) &&
-        //         (0 == ft_strncmp(haystack, needle, needle_len)))
-		// 			{printf("before return in loop, (char *)haystack = '%s'", (char *)haystack);
-        //         return (char *)haystack;}
-	    //     haystack++;
-		// }
-		i = 0;
-		while (i <= (len - needle_len))
+		if (0 == (needle_len = strnlen(needle, len)))
+		       return (char *)haystack;
+		for (i=0; i<=(int)(len-needle_len); i++)
 		{
-			if ((haystack[0] == needle[0]) &&
-						(0 == ft_strncmp(haystack, needle, needle_len)))
-						{printf("before return in loop, (char *)haystack = '%s'", (char *)haystack);
-						return (char *)haystack;}
-				haystack++;
-				i++;
+	        if ((haystack[0] == needle[0]) &&
+                (0 == ft_strncmp(haystack, needle, needle_len)))
+					{printf("before return in loop, (char *)haystack = '%s'", (char *)haystack);
+                return (char *)haystack;}
+	        haystack++;
 		}
-		puts("just before final return");
+		// i = 0;
+		// while (i <= (len - needle_len))
+		// {
+		// 	if ((haystack[0] == needle[0]) &&
+		// 				(0 == ft_strncmp(haystack, needle, needle_len)))
+		// 				{printf("before return in loop, (char *)haystack = '%s'", (char *)haystack);
+		// 				return (char *)haystack;}
+		// 		haystack++;
+		// 		i++;
+		// }
+		// puts("just before final return");
 		return (0);
 }
 
