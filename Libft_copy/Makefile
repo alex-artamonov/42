@@ -21,9 +21,9 @@ CFLAGS 	:= -Wall -Wextra -Werror
 
 NAME	:= libft.a
 
-$(NAME): $(OFILES)
-
 all: $(NAME)
+
+$(NAME): $(OFILES)
 	ar rcs $(NAME) $(OFILES)
 
 clean:
